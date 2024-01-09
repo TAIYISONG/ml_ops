@@ -1,0 +1,3 @@
+models:
+  num_of_weeks: 52
+  epoch: 20

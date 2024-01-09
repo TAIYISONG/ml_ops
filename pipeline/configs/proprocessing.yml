@@ -1,0 +1,27 @@
+###############################################################################
+## DATA PRE-PROCESS SCOPING
+############################################################################### 
+
+### Transaction Data:
+txn_preprocess:
+  sel_cols: ["CUSTOMER_SK", "CALENDAR_DT", "ITEM_SK", "TRANSACTION_RK", "CUSTOMER_CARD_SK",
+             "ITEM_QTY", "RETAIL_OUTLET_LOCATION_SK", "SELLING_RETAIL_AMT", "PROMO_SALES_IND_CD",
+             "TRANSACTION_TM", "ITEM_WEIGHT"]
+  # Number of weeks we want to move prior to run_date
+  n_weeks_back: 102
+
+
+### Customer Data
+# Active Customer Definitions
+active_cust:
+  # a customer is consider active if they have purchased in the last X weeks. 
+  n_weeks: 12
+  # when running a cold start of active customers we backfill X weeks:
+  n_backfill_cold_start_weeks: 104
+
+# set of parameters used to identify the status of the customers
+status_cust:
+  # In-scope customers need to have purchase history within X number of weeks 
+  in_scope_weeks: 104
+  # Number of weeks to identify those customers that are new
+  new_weeks: 8

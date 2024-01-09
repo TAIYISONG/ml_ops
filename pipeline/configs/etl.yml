@@ -1,0 +1,85 @@
+###############################################################################
+## GLOBAL SETTINGs
+###############################################################################
+# could overwrite the manual setting when calling get_context()
+region: "atlantic"
+run_mode: "DEV"  # could be either prod or dev, as well as determining the read base path
+run_date: "2021-07-30" # "today"
+
+# blob path 
+project_root_paths: "adhoc/oliver/cltv"
+
+
+
+###############################################################################
+## DATA PRE-PROCESS PATHS
+############################################################################### 
+data_inputs:
+
+  # -----------  EXTERNAL  -----------
+  # transaction data
+  transactions_path:
+    quebec: "prod_outputs/etl/quebec/txnitem/latest"
+    ontario: "prod_outputs/etl/ontario/txnitem/latest"
+    atlantic: "prod_outputs/etl/atlantic/txnitem/latest"
+    west: "prod_outputs/etl/west/txnitem/latest"
+  # customer
+  cust_ids: "sobeys_perso_etl_data/cust_flag_data"
+  cust_reachable_manual: "sobeys_perso/adhoc/contactable_am_iga_2"  # from Victoria.Coletsos@sobeys.com
+  cust_per_channel: "sobeys_perso/cust_per_channel/all/latest" # from Dave team, dropped in CRM_draw # TODO: change to automatic feed
+  # products data
+  upc_urls: "sobeys_perso/upc_eda/upc_urls"  # from EDAM (image links)
+  product_descriptions: "sobeys_perso/product_descriptions_eda/product_descriptions"  # from EDAM  # TODO: not used (remove if we don't need it for DTC)
+  product_descriptions_2: "sobeys_perso/product_descriptions_2_eda/product_descriptions_2"  # from SMT
+  product_urls_list: "sobeys_perso/product_urls_list/latest"  # from Digital Team (product page links)
+  exclusion_articles:  # from Josh # TODO: change to automatic feed
+    quebec: ”sobeys_perso/exclusion_articles_dtc/quebec/latest“ 
+    ontario: ”sobeys_perso/exclusion_articles_dtc/ontario/latest“
+    atlantic: ”sobeys_perso/exclusion_articles_dtc/atlantic/latest“
+    west: ”sobeys_perso/exclusion_articles_dtc/west/latest“
+  # calendar
+  calendar: "prod_outputs/etl/all/calendar/latest"
+  # store data
+  store_hier_path: "prod_outputs/etl/all/location/latest" # store_physical_location_no to natioanal description mapping
+  store_location_path:  # store specific attribute like shelf/aisle, etc.
+    quebec: "prod_outputs/etl/quebec/store_location/latest"
+    ontario: "prod_outputs/etl/ontario/store_location/latest"
+    atlantic: "prod_outputs/etl/atlantic/store_location/latest"
+    west: "prod_outputs/etl/west/store_location/latest"
+  # item hierarchies
+  item_hier_path: "prod_outputs/etl/all/product/latest"
+  # promopy output
+  cannib_path: 
+    quebec: "prod_outputs/quebec/cannibalization/latest/cannibalization_output"
+    ontario: "prod_outputs/ontario/cannibalization/latest/cannibalization_output"
+    atlantic: "prod_outputs/atlantic/cannibalization/latest/cannibalization_output"
+    west: "prod_outputs/west/cannibalization/latest/cannibalization_output"
+  cogs_path:
+    quebec: "prod_outputs/etl/quebec/cogs/latest"
+    ontario: "prod_outputs/etl/ontario/cogs/latest"
+    atlantic: "prod_outputs/etl/atlantic/cogs/latest"
+    west: "prod_outputs/etl/west/cogs/latest"
+  halo:
+    quebec: "prod_outputs/quebec/halo/latest/halo_candidates"
+    ontario: "prod_outputs/ontario/halo/latest/halo_candidates"
+    atlantic: "prod_outputs/atlantic/halo/latest/halo_candidates"
+    west: "prod_outputs/west/halo/latest/halo_candidates"
+  halo_category:
+    quebec: "prod_outputs/quebec/halo/latest/top_associations_cats/"
+    ontario: "prod_outputs/ontario/halo/latest/top_associations_cats/"
+    atlantic: "prod_outputs/atlantic/halo/latest/top_associations_cats/"
+    west: "prod_outputs/west/halo/latest/top_associations_cats/"
+  elasticity: 
+    quebec: "prod_outputs/quebec/baseline/latest/final_coefficients/"
+    ontario: "prod_outputs/ontario/baseline/latest/final_coefficients/"
+    atlantic: "prod_outputs/atlantic/baseline/latest/final_coefficients/"
+    west: "prod_outputs/west/baseline/latest/final_coefficients/"
+
+
+preprocess_data_outputs:
+  core_feature_txn: "{project_root_paths}/{run_mode}/preprocess_outputs/core_feature_txn_{run_date}"
+
+
+
+
+
